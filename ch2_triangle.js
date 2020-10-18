@@ -1,5 +1,2 @@
-let tri = ''
-while (tri.length < 7) {
-    tri += '#'
-    console.log(tri)
-}
+for (let t = '#'; t.length <= 7; t += '#')
+    console.log(t);
