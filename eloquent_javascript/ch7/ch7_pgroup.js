@@ -1,33 +1,24 @@
 class PGroup {
-    constructor() {
-        this.set = [];
+    constructor(set) {
+        this.set = set;
     }
 
     add(v) {
-        if (this.set.indexOf(v) !== -1) return this;
-        let group = new PGroup();
-        for (let old_v of this.set)
-            group.set.push(old_v);
-        group.set.push(v);
-        return group;
+        if (this.has(v)) return this;
+        return new PGroup(this.set.concat(v));
     }
 
     delete(v) {
-        if (this.set.indexOf(v) === -1) return this;
-        let group = new PGroup();
-        for (let old_v of this.set) {
-            if (old_v === v) continue;
-            group.set.push(old_v);
-        }
-        return group;
+        if (!this.has(v)) return this;
+        return new PGroup(this.set.filter(x => (x !== v)));
     }
 
     has(v) {
-        return this.set.indexOf(v) !== -1;
+        return this.set.includes(v);
     }
 }
 
-PGroup.empty = new PGroup();
+PGroup.empty = new PGroup([]);
 
 
 let a = PGroup.empty.add("a");
